@@ -1,0 +1,6 @@
+1. 层命名带‘()’
+2. get_variable(),指定参数名称，不然容易出错
+3. tf没有prod，使用数学函数应该参考数学文档
+4. 在get_variable中，应该注意参数名称复用，最好加上第几层
+5. variable_scope(),注意reuse
+6. 注意比如AF层的矩阵乘法
