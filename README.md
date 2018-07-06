@@ -1,0 +1,15 @@
+# CNN_Model_1
+- 学习使用tensorflow建立CNN模型
+  - 在cs231n中的tensorflow作业中要求用tf建立模型，由于在之前的作业中整个Deemo建立比较完善，因而尝试使用tf模仿建立
+- 文件
+  - bins中定义了一些辅助函数：
+    - create_placeholder()
+    - parse_param()：用于建立模型时各种层以及损失函数等的参数解析，便于修改
+  - layers
+    - 目前有全连接层，卷积层，高斯初始化，flat（层），损失层
+  - model
+    - 定义了Model类，用于建立模型
+  - solver
+    - Solver类，一些训练前的预处理和设置，损失函数，优化方法定义，训练过程
+  - note.md
+    - 记录自己写下的bug等
