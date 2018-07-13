@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
-from Example_Model.bins import *
-from Example_Model.layers import *
+from CNN_Model_1.bins import *
+from CNN_Model_1.layers import *
 
 
 class Solver(object):

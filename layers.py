@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from Example_Model.bins import *
+from CNN_Model_1.bins import *
 
 
 def gauss_initer():

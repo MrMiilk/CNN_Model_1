@@ -1,8 +1,5 @@
-import numpy as np
-import tensorflow as tf
-from Example_Model.bins import *
-from Example_Model.model import *
-from Example_Model.solver import *
+from CNN_Model_1.model import *
+from CNN_Model_1.solver import *
 
 
 if __name__ == '__main__':
