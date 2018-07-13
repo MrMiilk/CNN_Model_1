@@ -7,7 +7,7 @@ from CNN_Model_1.solver import *
 class Model(Solver):
     """继承Solver类"""
 
-    def __init__(self, X, y, layers_params, num_classes):
+    def __init__(self, X, y, layers_params, num_classes, batch_size):
         """初始化模型"""
         super(Model, self).__init__()
         self.X = X
@@ -15,6 +15,7 @@ class Model(Solver):
         self.layers_params = layers_params
         self.num_hidden_layers = len(layers_params)
         self.num_classes = num_classes
+        self.batch_size = batch_size
 
         self._one_hot()
         self._reset()
@@ -32,5 +33,4 @@ class Model(Solver):
                 a = conv(a, param, layer_index, initer)
             if layer_type == 'flat':
                 a = flat(a, param, layer_index)
-                print(a.shape)
-        self.pred = a
+        self.pred = a#tf.reshape(a, [self.batch_size, 1, -1])

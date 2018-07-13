@@ -42,7 +42,7 @@ class Reader(object):
             values,
             features={
                 'img': tf.FixedLenFeature([], tf.string),
-                'label': tf.FixedLenFeature([1], tf.int64)
+                'label': tf.FixedLenFeature([], tf.int64)
             }
         )
         # print(features['img'])
@@ -55,9 +55,9 @@ class Reader(object):
         self.images = tf.decode_raw(features['img'], tf.int8)
 
         self.images = tf.reshape(self.images, [32, 32, 3])
-        print(self.images)
+        # print(self.images)
         self.images = tf.cast(self.images, tf.float32)
-        print(self.images)
+        # print(self.images)
         self.labels = tf.cast(features['label'], tf.int32)
 
     def input_pipline(self, batch_size, min_after_dequeue=1024, ):

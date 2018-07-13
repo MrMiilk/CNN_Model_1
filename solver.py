@@ -2,6 +2,7 @@ import numpy as np
 import tensorflow as tf
 from CNN_Model_1.bins import *
 from CNN_Model_1.layers import *
+from CNN_Model_1.input_data import *
 
 
 class Solver(object):
@@ -54,39 +55,35 @@ class Solver(object):
         self._loss()
         self._optimzer()
 
-    def train(self, train_X, train_y, num_epochs=30, batch_size=100):
+    def train(self,):
         """为训练提供接口"""
-        step = 0
+
         print_bool = True if self.print_every is not None else False
+
         with tf.Session() as sess:
-            sess.run(tf.global_variables_initializer())
+            init_op = tf.group([
+                tf.global_variables_initializer(),
+                tf.local_variables_initializer()
+            ])
+            sess.run(init_op)
             writer = tf.summary.FileWriter('logs/', sess.graph)
-            return
-            for epoch in range(num_epochs):
-                batches = self._data_batches(train_X, train_y, batch_size)
-                for (batch_X, batch_y) in batches:
-                    foods = {
-                        self.X:batch_X,
-                        self.y:batch_y
-                    }
-                    self.train_step.run(feed_dict=foods)
-                    step += 1
-                    loss_now = self.loss.run(feed_dict=foods)
-                    self.loss_list.append(loss_now)
-                    ##TODO:print training logs##
-                    if print_bool and step % self.print_every:
-                        print("step:%d\tepoch:%s\t, loss:%s" % (step, str(epoch), str(loss_now)))
-                    ##TODO: plot loss scale##
-                    if self.verbose:
-                        pass
-
-
-
-
-
-
-
-
+            coord = tf.train.Coordinator()
+            threads = tf.train.start_queue_runners(coord=coord)
+            print('Threads:', threads)
+            # foods = {
+            #     self.X:batch_X,
+            #     self.y:batch_y
+            # }
+            try:
+                for _ in range(1000):
+                    if not coord.should_stop():
+                        self.train_step.run()
+            except tf.errors.OutOfRangeError:
+                print('Catch OutOfRangeError')
+            finally:
+                coord.request_stop()
+                print('Finish reading')
+            coord.join(threads)
 
 
     def check_accuracy(self):

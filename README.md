@@ -1,7 +1,7 @@
 # CNN_Model_1
 - 学习使用tensorflow建立CNN模型
   - 在cs231n中的tensorflow作业中要求用tf建立模型，由于在之前的作业中整个Deemo建立比较完善，因而尝试使用tf模仿建立
-- 文件
+### 初始文件
   - bins中定义了一些辅助函数：
     - create_placeholder()
     - parse_param()：用于建立模型时各种层以及损失函数等的参数解析，便于修改
@@ -13,3 +13,9 @@
     - Solver类，一些训练前的预处理和设置，损失函数，优化方法定义，训练过程
   - note.md
     - 记录自己写下的bug等
+
+### 修改：
+    - 添加input_data.py
+        - 直接运行会将cif10数据转化为TFRecord文件，保存到dataset文件
+        - 添加 Reader类，提供pipline接口供给数据
+    - 添加test.py测试读取队列是否可以读取文件
